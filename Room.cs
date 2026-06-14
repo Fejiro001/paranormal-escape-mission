@@ -45,7 +45,7 @@
         }
         public void ShowRoomInfo()
         {
-            Console.WriteLine($"Welcome to the {Name} room");
+            Console.WriteLine($"You are in the {Name}");
             if (Ghost != null)
             {
                 Console.WriteLine("Something feels off...");

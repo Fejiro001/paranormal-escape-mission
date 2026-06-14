@@ -22,7 +22,10 @@
                 new Room(RoomNames[5])
             };
         }
-
+        public bool IsGameOver(Investigator investigator)
+        {
+            return investigator.GetTotalCredibility() < REQUIRED_CREDIBILITY && investigator.SanityLevel > 0;
+        }
         public void StartInvestigation(Investigator investigator)
         {
             // Reset investigator state
@@ -41,8 +44,12 @@
             Rooms[4].Evidence = new Evidence("EVP Recording", "Audio captured faint whispering voices to questions.", 90);
 
             // Game Intro
-            Console.WriteLine($"You have entered {Name} Manor.");
-            Console.WriteLine($"Collect evidence witha a total credebility score of {REQUIRED_CREDIBILITY} score or higher to escape.");
+            string welcomeMessage = $"Welcome to {Name}";
+            Console.WriteLine("===============================");
+            Console.WriteLine(welcomeMessage.ToUpper());
+            Console.WriteLine("===============================");
+            Console.WriteLine();
+            Console.WriteLine($"Collect evidence with a total credibility score of {REQUIRED_CREDIBILITY} score or higher to escape.");
         }
 
         public void EndInvestigation(Investigator investigator)
