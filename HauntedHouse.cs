@@ -29,25 +29,6 @@
             return investigator.GetTotalCredibility() >= REQUIRED_CREDIBILITY || investigator.SanityLevel <= 0;
         }
 
-        public void StartInvestigation(Investigator investigator)
-        {
-            // Reset investigator state
-            investigator.SanityLevel = STARTING_SANITY;
-            investigator.Items.Clear();
-            investigator.EvidenceCollected.Clear();
-
-            CreateRooms();
-
-            // Game Intro
-            string welcomeMessage = $"Welcome to {Name}";
-            Console.WriteLine("===============================");
-            Console.WriteLine(welcomeMessage.ToUpper());
-            Console.WriteLine("===============================");
-            Console.WriteLine();
-            Console.WriteLine($"Collect evidence with a total credibility score of {REQUIRED_CREDIBILITY} score or higher to escape.");
-            Console.WriteLine();
-        }
-
         public int GetRandomRoomIndex()
         {
             return _rng.Next(1, Rooms.Length);
@@ -85,6 +66,25 @@
 
             Rooms[room4].Ghost = new Ghost("Jasper", 20, Ghost.BehaviorType.Violent);
             Rooms[room4].Evidence = new Evidence("EVP Recording", "Audio captured faint whispering voices to questions.", 90);
+        }
+
+        public void StartInvestigation(Investigator investigator)
+        {
+            // Reset investigator state
+            investigator.SanityLevel = STARTING_SANITY;
+            investigator.Items.Clear();
+            investigator.EvidenceCollected.Clear();
+
+            CreateRooms();
+
+            // Game Intro
+            string welcomeMessage = $"Welcome to {Name}";
+            Console.WriteLine("===============================");
+            Console.WriteLine(welcomeMessage.ToUpper());
+            Console.WriteLine("===============================");
+            Console.WriteLine();
+            Console.WriteLine($"Collect evidence with a total credibility score of {REQUIRED_CREDIBILITY} score or higher to escape.");
+            Console.WriteLine();
         }
 
         public void EndInvestigation(Investigator investigator)

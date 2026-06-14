@@ -11,6 +11,7 @@
             Description = description;
             CredibilityScore = credibilityScore;
         }
+
         public void ShowDetails()
         {
             Console.WriteLine("Evidence Information:");

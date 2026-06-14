@@ -1,6 +1,4 @@
-﻿using System.Net.NetworkInformation;
-
-namespace ParanormalEscapeMission
+﻿namespace ParanormalEscapeMission
 {
     public class Room
     {
