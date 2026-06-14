@@ -14,11 +14,8 @@
         public void UseItem(Investigator investigator)
         {
             investigator.SanityLevel += EffectStrength;
-            if (investigator.SanityLevel > 100)
-            {
-                investigator.SanityLevel = 100;
-            }
         }
+
         public void ShowDetails()
         {
             Console.WriteLine("Item Information:");

@@ -5,7 +5,7 @@ namespace ParanormalEscapeMission
     public class Room
     {
         public string Name { get; set; }
-        public Ghost Ghost { get; set; }
+        public Ghost? Ghost { get; set; }
         public Item? Item { get; set; }
         public Evidence? Evidence { get; set; }
         public Room(string name)

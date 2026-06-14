@@ -11,34 +11,47 @@
             HauntedHouse house = new HauntedHouse("The Screaming Oaks");
             Investigator investigator = new Investigator("Stephanie Jones", house.Rooms[0], 100);
             house.StartInvestigation(investigator);
-
-            Console.WriteLine("Start Game?");
-            Console.WriteLine("1. Start Exploring");
-            Console.WriteLine("2. Exit");
-
-            bool isCorrect = int.TryParse(Console.ReadLine(), out int startIndex);
+            Console.WriteLine("The entrance feels strangely calm...");
             Console.WriteLine();
+
+            bool isCorrect;
+            int startIndex;
 
             do
             {
-                switch (startIndex)
+                Console.WriteLine("Start Game?");
+                Console.WriteLine("1. Start Exploring");
+                Console.WriteLine("2. Exit");
+
+                isCorrect = int.TryParse(Console.ReadLine(), out startIndex)
+                    && startIndex >= 1
+                    && startIndex <= 2;
+                Console.WriteLine();
+
+                if (!isCorrect)
                 {
-                    case 1:
-                        ShowRooms(house, investigator);
-                        break;
-                    case 2:
-                        house.EndInvestigation(investigator);
-                        break;
-                    default:
-                        Console.WriteLine("Invalid number.");
-                        break;
+                    Console.WriteLine("Invalid input.");
+                    Console.WriteLine();
                 }
-            } while (!isCorrect && startIndex < 1 && startIndex > 2);
+            }
+            while (!isCorrect);
+
+            switch (startIndex)
+            {
+                case 1:
+                    ShowRooms(house, investigator);
+                    break;
+                case 2:
+                    house.EndInvestigation(investigator);
+                    break;
+                default:
+                    Console.WriteLine("Invalid number.");
+                    break;
+            }
         }
         static void ShowRooms(HauntedHouse house, Investigator investigator)
         {
-            bool gameRunning = house.IsGameOver(investigator);
-            while (gameRunning)
+            while (!house.IsGameOver(investigator))
             {
                 investigator.ShowStatus();
 
@@ -66,7 +79,14 @@
                         house.Rooms[roomIndex].SearchRoom(investigator);
                     }
                 }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Enter a valid number.");
+                }
             }
+
+            house.EndInvestigation(investigator);
         }
     }
 }
