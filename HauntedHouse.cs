@@ -13,7 +13,7 @@
         public HauntedHouse(string name)
         {
             Name = name;
-            Rooms = new Room[]
+            Rooms = new Room[ROOM_COUNT]
             {
                 new Room(RoomNames[0]),
                 new Room(RoomNames[1]),
@@ -29,9 +29,9 @@
             return investigator.GetTotalCredibility() >= REQUIRED_CREDIBILITY || investigator.SanityLevel <= 0;
         }
 
-        public int GetRandomRoomIndex()
+        private int GetRandomRoomIndex()
         {
-            return _rng.Next(1, Rooms.Length);
+            return _rng.Next(1, ROOM_COUNT);
         }
 
         public void CreateRooms()
