@@ -25,6 +25,7 @@
             Console.WriteLine($"- Name: {Name}");
             Console.WriteLine($"- Description: {Description}");
             Console.WriteLine($"- Effect Strength: {EffectStrength}");
+            Console.WriteLine();
         }
     }
 }

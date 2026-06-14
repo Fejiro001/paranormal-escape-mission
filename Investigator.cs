@@ -10,10 +10,10 @@
         public Investigator(string name, Room room, int sanityLevel)
         {
             Name = name;
+            CurrentRoom = room;
+            SanityLevel = sanityLevel;
             Items = new List<Item>();
             EvidenceCollected = new List<Evidence>();
-            SanityLevel = sanityLevel;
-            CurrentRoom = room;
         }
         public int GetTotalCredibility()
         {
@@ -24,29 +24,55 @@
             }
             return total;
         }
-        public void SearchRoom(Room room)
+        public void MoveToRoom(Room room)
         {
-            
+            CurrentRoom = room;
+            room.ShowRoomInfo();
         }
-        public void CollectEvidence()
+        public void ShowStatus()
         {
-
-        }
-        public void PickupItem()
-        {
-
+            Console.WriteLine($"Investigator: {Name}");
+            Console.WriteLine($"Current Room: {CurrentRoom.Name}");
+            Console.WriteLine($"Sanity: {SanityLevel}");
+            Console.WriteLine($"Credibility Score: {GetTotalCredibility()}");
+            Console.WriteLine();
         }
         public void ShowInventory()
         {
+            Console.WriteLine("Currently in your inventory:");
+            Console.WriteLine();
 
+            if (Items.Count > 0)
+            {
+                foreach (Item item in Items)
+                {
+                    item.ShowDetails();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Inventory is currently empty");
+            }
         }
         public void ShowEvidence()
         {
+            Console.WriteLine("Evidence discovered so far:");
+            Console.WriteLine();
 
-        }
-        public void ReduceSanity()
-        {
-
+            if (EvidenceCollected.Count > 0)
+            {
+                foreach (Evidence e in EvidenceCollected)
+                {
+                    e.ShowDetails();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No evidence collected so far");
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Total Credibility Score: {GetTotalCredibility()}");
+            Console.WriteLine();
         }
     }
 }
