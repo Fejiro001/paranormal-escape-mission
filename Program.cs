@@ -24,7 +24,6 @@
                 switch (startIndex)
                 {
                     case 1:
-                        investigator.ShowStatus();
                         ShowRooms(house, investigator);
                         break;
                     case 2:
@@ -41,6 +40,8 @@
             bool gameRunning = house.IsGameOver(investigator);
             while (gameRunning)
             {
+                investigator.ShowStatus();
+
                 Console.WriteLine($"Rooms in {house.Name}:");
                 for (int i = 0; i < house.Rooms.Length; i++)
                 {

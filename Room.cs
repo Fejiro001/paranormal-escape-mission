@@ -1,4 +1,6 @@
-﻿namespace ParanormalEscapeMission
+﻿using System.Net.NetworkInformation;
+
+namespace ParanormalEscapeMission
 {
     public class Room
     {
@@ -26,6 +28,10 @@
                 foundSomething = true;
                 investigator.EvidenceCollected.Add(Evidence);
                 Console.WriteLine($"Evidence discovered: {Evidence.Name}!");
+                Console.WriteLine($"You have gained {Evidence.CredibilityScore} credibility score.");
+                Console.WriteLine("---------------------------------------------------");
+                Evidence.ShowDetails();
+                Console.WriteLine("---------------------------------------------------");
                 // Remove evidence from room
                 Evidence = null;
             }
@@ -34,7 +40,12 @@
             {
                 foundSomething = true;
                 investigator.Items.Add(Item);
-                Console.WriteLine($"You found: {Item.Name}!");
+                Item.UseItem(investigator);
+                Console.WriteLine($"You found an Item: {Item.Name}!");
+                Console.WriteLine($"You have gained {Item.EffectStrength} sanity points.");
+                Console.WriteLine("---------------------------------------------------");
+                Item.ShowDetails();
+                Console.WriteLine("---------------------------------------------------");
                 // Remove item from room
                 Item = null;
             }
@@ -43,10 +54,12 @@
             {
                 Console.WriteLine("Nothing found here!");
             }
+            Console.WriteLine();
         }
         public void ShowRoomInfo()
         {
-            Console.WriteLine($"You are in the {Name}");
+            Console.WriteLine($"You are in the {Name}.");
+            Console.WriteLine();
             if (Ghost != null)
             {
                 Console.WriteLine("Something feels off...");

@@ -31,6 +31,7 @@
         }
         public void ShowStatus()
         {
+            Console.WriteLine("---------------------------------------------------");
             Console.WriteLine($"Investigator: {Name}");
             Console.WriteLine($"Your current location: {CurrentRoom.Name}");
             Console.WriteLine($"Sanity: {SanityLevel}");
