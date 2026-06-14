@@ -32,7 +32,7 @@
         public void ShowStatus()
         {
             Console.WriteLine($"Investigator: {Name}");
-            Console.WriteLine($"You are in: {CurrentRoom.Name}");
+            Console.WriteLine($"Your current location: {CurrentRoom.Name}");
             Console.WriteLine($"Sanity: {SanityLevel}");
             Console.WriteLine($"Credibility Score: {GetTotalCredibility()}");
             Console.WriteLine();

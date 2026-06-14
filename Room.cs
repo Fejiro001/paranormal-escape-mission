@@ -18,6 +18,7 @@
                 foundSomething = true;
                 Ghost.Appear();
                 Ghost.Scare(investigator);
+                Ghost.GetDescription();
             }
 
             if (Evidence != null)

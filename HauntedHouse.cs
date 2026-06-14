@@ -50,6 +50,7 @@
             Console.WriteLine("===============================");
             Console.WriteLine();
             Console.WriteLine($"Collect evidence with a total credibility score of {REQUIRED_CREDIBILITY} score or higher to escape.");
+            Console.WriteLine();
         }
 
         public void EndInvestigation(Investigator investigator)

@@ -15,16 +15,20 @@
         public void Appear()
         {
             Console.WriteLine($"{Name} has appeared!");
+            Console.WriteLine();
         }
         public void Scare(Investigator investigator)
         {
             investigator.SanityLevel -= GiveDamage();
+            Console.WriteLine($"You have lost {ScareLevel} sanity points.");
+            Console.WriteLine();
         }
-        public string GetDescription()
+        public void GetDescription()
         {
-            return $"Ghost Name: {Name}; Scare Level: {ScareLevel}; Behavior: {Behavior}.";
+            Console.WriteLine($"Ghost Name: {Name}; Scare Level: {ScareLevel}; Behavior: {Behavior}.");
+            Console.WriteLine();
         }
-        public int GiveDamage()
+        private int GiveDamage()
         {
             switch (Behavior)
             {

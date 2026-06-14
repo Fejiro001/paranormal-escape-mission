@@ -12,15 +12,35 @@
             Investigator investigator = new Investigator("Stephanie Jones", house.Rooms[0], 100);
             house.StartInvestigation(investigator);
 
-            bool gameRunning = house.IsGameOver(investigator);
+            Console.WriteLine("Start Game?");
+            Console.WriteLine("1. Start Exploring");
+            Console.WriteLine("2. Exit");
 
+            bool isCorrect = int.TryParse(Console.ReadLine(), out int startIndex);
+            Console.WriteLine();
+
+            do
+            {
+                switch (startIndex)
+                {
+                    case 1:
+                        investigator.ShowStatus();
+                        ShowRooms(house, investigator);
+                        break;
+                    case 2:
+                        house.EndInvestigation(investigator);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid number.");
+                        break;
+                }
+            } while (!isCorrect && startIndex < 1 && startIndex > 2);
+        }
+        static void ShowRooms(HauntedHouse house, Investigator investigator)
+        {
+            bool gameRunning = house.IsGameOver(investigator);
             while (gameRunning)
             {
-                investigator.ShowStatus();
-
-                bool correct;
-                int userInput;
-
                 Console.WriteLine($"Rooms in {house.Name}:");
                 for (int i = 0; i < house.Rooms.Length; i++)
                 {
@@ -29,18 +49,20 @@
 
                 Console.WriteLine();
                 Console.WriteLine("Choose a room to continue:");
-                correct = int.TryParse(Console.ReadLine(), out userInput);
-                userInput--;
+                bool isCorrectRoom = int.TryParse(Console.ReadLine(), out int roomIndex);
+                roomIndex--;
 
-                if (correct && userInput >= 0 && userInput < house.Rooms.Length)
+                if (isCorrectRoom && roomIndex >= 0 && roomIndex < house.Rooms.Length)
                 {
-                    if (investigator.CurrentRoom == house.Rooms[userInput])
+                    if (investigator.CurrentRoom == house.Rooms[roomIndex])
                     {
-                        Console.WriteLine("You are already in this room. cHoose another room.");
+                        Console.WriteLine("You are already in this room. Choose another room.");
+                        Console.WriteLine();
                     }
                     else
                     {
-                        investigator.MoveToRoom(house.Rooms[userInput]);
+                        investigator.MoveToRoom(house.Rooms[roomIndex]);
+                        house.Rooms[roomIndex].SearchRoom(investigator);
                     }
                 }
             }
