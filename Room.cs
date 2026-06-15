@@ -25,8 +25,10 @@
             {
                 foundSomething = true;
                 investigator.EvidenceCollected.Add(Evidence);
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Evidence discovered: {Evidence.Name}!");
                 Console.WriteLine($"You have gained {Evidence.CredibilityScore} credibility score.");
+                Console.ResetColor();
                 Console.WriteLine("---------------------------------------------------");
                 Evidence.ShowDetails();
                 Console.WriteLine("---------------------------------------------------");

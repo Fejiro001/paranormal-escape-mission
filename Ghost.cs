@@ -15,7 +15,9 @@
 
         public void Appear()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"{Name} has appeared!");
+            Console.ResetColor();
             Console.WriteLine();
         }
 

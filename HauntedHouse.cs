@@ -6,7 +6,7 @@
         private const int ROOM_COUNT = 6;
         private const int STARTING_SANITY = 100;
         private static readonly Random _rng = new Random();
-        private readonly string[] RoomNames = new string[ROOM_COUNT] { "Entrance", "Library", "Kitchen", "Basement", "Attic", "Bedroom" };
+        private readonly string[] RoomNames = { "Entrance", "Library", "Kitchen", "Basement", "Attic", "Bedroom" };
 
         public string Name { get; set; }
         public Room[] Rooms { get; }
@@ -140,7 +140,6 @@
 
             Console.WriteLine();
             Console.WriteLine($"Evidence Credibility Score: {investigator.GetTotalCredibility()}.");
-
             Console.WriteLine();
         }
     }

@@ -49,44 +49,103 @@
                     break;
             }
         }
+
         static void ShowRooms(HauntedHouse house, Investigator investigator)
         {
             while (!house.IsGameOver(investigator))
             {
                 investigator.ShowStatus();
 
-                Console.WriteLine($"Rooms in {house.Name}:");
-                for (int i = 0; i < house.Rooms.Length; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {house.Rooms[i].Name}");
-                }
+                bool isValid;
+                int choice;
 
-                Console.WriteLine();
-                Console.WriteLine("Choose a room to continue:");
-                bool isCorrectRoom = int.TryParse(Console.ReadLine(), out int roomIndex);
-                roomIndex--;
-
-                if (isCorrectRoom && roomIndex >= 0 && roomIndex < house.Rooms.Length)
+                do
                 {
-                    if (investigator.CurrentRoom == house.Rooms[roomIndex])
+                    Console.WriteLine("Choose an action:");
+                    Console.WriteLine("1. Move to Room");
+                    Console.WriteLine("2. View Inventory");
+                    Console.WriteLine("3. View Evidence");
+
+                    isValid = int.TryParse(Console.ReadLine(), out choice)
+                        && choice >= 1
+                        && choice <= 3;
+                    Console.WriteLine();
+
+                    if (!isValid)
                     {
-                        Console.WriteLine("You are already in this room. Choose another room.");
+                        Console.WriteLine("Invalid input.");
                         Console.WriteLine();
                     }
-                    else
-                    {
-                        investigator.MoveToRoom(house.Rooms[roomIndex]);
-                        house.Rooms[roomIndex].SearchRoom(investigator);
-                    }
+
                 }
-                else
+                while (!isValid);
+
+                switch (choice)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Enter a valid number.");
+                    case 1:
+                        MoveToRoom(house, investigator);
+                        break;
+
+                    case 2:
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        investigator.ShowInventory();
+                        Console.ResetColor();
+                        break;
+
+                    case 3:
+                        Console.BackgroundColor = ConsoleColor.DarkCyan;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        investigator.ShowEvidence();
+                        Console.ResetColor();
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
                 }
             }
 
             house.EndInvestigation(investigator);
+        }
+
+        static void MoveToRoom(HauntedHouse house, Investigator investigator)
+        {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"Rooms in {house.Name}:");
+            Console.ResetColor();
+            Console.WriteLine();
+
+            for (int i = 0; i < house.Rooms.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {house.Rooms[i].Name}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Choose a room to continue:");
+            bool isCorrectRoom = int.TryParse(Console.ReadLine(), out int roomIndex);
+            roomIndex--;
+
+            if (isCorrectRoom && roomIndex >= 0 && roomIndex < house.Rooms.Length)
+            {
+                if (investigator.CurrentRoom == house.Rooms[roomIndex])
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("You are already in this room. Choose another room.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    investigator.MoveToRoom(house.Rooms[roomIndex]);
+                    house.Rooms[roomIndex].SearchRoom(investigator);
+                }
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Enter a valid number.");
+            }
         }
     }
 }
