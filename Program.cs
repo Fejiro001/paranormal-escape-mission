@@ -15,13 +15,13 @@
             {
                 HauntedHouse house = new HauntedHouse("The Screaming Oaks");
                 Investigator investigator = new Investigator("Stephanie Jones", house.Rooms[0], 100);
+
                 house.StartInvestigation(investigator);
                 Console.WriteLine("The entrance feels strangely calm...");
                 Console.WriteLine();
 
                 bool isCorrect;
                 int startIndex;
-
                 do
                 {
                     Console.WriteLine("Start Game?");
@@ -44,7 +44,7 @@
                 switch (startIndex)
                 {
                     case 1:
-                        ShowRooms(house, investigator);
+                        MainMenu(house, investigator);
                         break;
                     case 2:
                         running = EndGame();
@@ -58,34 +58,34 @@
             }
         }
 
+        // Prompt to confirm game exit
         static bool EndGame()
         {
             bool choiceCorrect;
             int choice;
-
             do
             {
-                Console.WriteLine();
                 Console.WriteLine("Are you sure you want to leave?");
                 Console.WriteLine("1. Yes");
                 Console.WriteLine("2. No");
 
-                choiceCorrect = int.TryParse(Console.ReadLine(), out choice);
+                choiceCorrect = int.TryParse(Console.ReadLine(), out choice)
+                    && choice >= 1
+                    && choice <= 2;
             }
-            while (!choiceCorrect || choice < 1 || choice > 2);
+            while (!choiceCorrect);
 
             if (choice == 1) return false;
 
             return true;
         }
 
-        static void ShowRooms(HauntedHouse house, Investigator investigator)
+        static void MainMenu(HauntedHouse house, Investigator investigator)
         {
             while (!house.IsGameOver(investigator))
             {
                 bool isValid;
                 int choice;
-
                 do
                 {
                     Console.WriteLine("Choose an action:");
@@ -109,7 +109,7 @@
                 switch (choice)
                 {
                     case 1:
-                        MoveToRoom(house, investigator);
+                        ShowRooms(house, investigator);
                         break;
                     case 2:
                         investigator.ShowInventory();
@@ -125,10 +125,9 @@
             }
         }
 
-        static void MoveToRoom(HauntedHouse house, Investigator investigator)
+        static void ShowRooms(HauntedHouse house, Investigator investigator)
         {
             bool showRoomsList = true;
-
             while (showRoomsList && !house.IsGameOver(investigator))
             {
                 investigator.ShowStatus();
@@ -179,6 +178,8 @@
                 }
             }
 
+            // End game if all sanity points are lost
+            // Or max credibility points has been collected
             house.EndInvestigation(investigator);
         }
     }
