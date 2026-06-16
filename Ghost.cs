@@ -24,13 +24,14 @@
         public void Scare(Investigator investigator)
         {
             investigator.SanityLevel -= GiveDamage();
-            Console.WriteLine($"You have lost {ScareLevel} sanity points.");
+            //ScareLevel = GiveDamage();
+            Console.WriteLine($"You have lost {GiveDamage()} sanity points.");
             Console.WriteLine();
         }
 
         public void GetDescription()
         {
-            Console.WriteLine($"Ghost Name: {Name}; Scare Level: {ScareLevel}; Behavior: {Behavior}.");
+            Console.WriteLine($"Ghost Name: {Name}; Scare Level: {GiveDamage()}; Behavior: {Behavior}.");
             Console.WriteLine();
         }
 

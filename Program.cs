@@ -53,6 +53,8 @@
                         Console.WriteLine("Invalid number.");
                         break;
                 }
+
+                if (house.IsGameOver(investigator)) { running = false; }
             }
         }
 
@@ -121,15 +123,13 @@
                 }
 
             }
-
-            house.EndInvestigation(investigator);
         }
 
         static void MoveToRoom(HauntedHouse house, Investigator investigator)
         {
             bool showRoomsList = true;
 
-            while (showRoomsList)
+            while (showRoomsList && !house.IsGameOver(investigator))
             {
                 investigator.ShowStatus();
 
@@ -178,6 +178,8 @@
                     Console.WriteLine("Enter a valid number.");
                 }
             }
+
+            house.EndInvestigation(investigator);
         }
     }
 }
