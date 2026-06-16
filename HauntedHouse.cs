@@ -36,9 +36,9 @@
             // Game Intro
             string welcomeMessage = $"Welcome to {Name}";
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("===============================");
-            Console.WriteLine(welcomeMessage.ToUpper());
-            Console.WriteLine("===============================");
+            Console.WriteLine("=====================================================");
+            Console.WriteLine($"\t{welcomeMessage.ToUpper()}");
+            Console.WriteLine("=====================================================");
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine($"Collect evidence with a total credibility score of {REQUIRED_CREDIBILITY} or higher to escape.");

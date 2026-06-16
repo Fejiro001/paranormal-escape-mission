@@ -37,7 +37,7 @@
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine($"Investigator: {Name}");
             Console.WriteLine($"Your current location: {CurrentRoom.Name}");
-            Console.WriteLine($"Sanity: {SanityLevel}");
+            Console.WriteLine($"Sanity Level: {SanityLevel}");
             Console.WriteLine($"Credibility Score: {GetTotalCredibility()}");
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine();

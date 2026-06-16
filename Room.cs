@@ -58,6 +58,12 @@
                 Console.WriteLine("Nothing found here!");
             }
             Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("PRESS \"ENTER\" TO CONTINUE");
+            Console.ResetColor();
+            Console.ReadLine();
+            Console.WriteLine();
         }
 
         public void ShowRoomInfo()
