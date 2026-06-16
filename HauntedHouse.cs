@@ -89,26 +89,30 @@
 
         public void EndInvestigation(Investigator investigator)
         {
-            string result = "";
-
-            if (investigator.GetTotalCredibility() >= REQUIRED_CREDIBILITY && investigator.SanityLevel > 0)
-            {
-                result = "You have won the game.";
-            }
-            else
-            {
-                result = "You have lost the game.";
-            }
-
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("====================");
             Console.WriteLine("FINAL REPORT");
             Console.WriteLine("====================");
+            Console.ResetColor();
 
             Console.WriteLine();
-            Console.WriteLine(result);
+            if (investigator.GetTotalCredibility() >= REQUIRED_CREDIBILITY && investigator.SanityLevel > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You have won the game.");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("You have lost the game.");
+            }
             Console.WriteLine();
+            Console.ResetColor();
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Items Collected:");
+            Console.ResetColor();
+
             if (investigator.Items.Count > 0)
             {
                 foreach (Item item in investigator.Items)
@@ -122,7 +126,10 @@
             }
 
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Evidence Discovered:");
+            Console.ResetColor();
+
             if (investigator.EvidenceCollected.Count > 0)
             {
                 foreach (Evidence evidence in investigator.EvidenceCollected)

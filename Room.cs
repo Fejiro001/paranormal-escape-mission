@@ -41,8 +41,10 @@
                 foundSomething = true;
                 investigator.Items.Add(Item);
                 Item.UseItem(investigator);
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine($"You found an Item: {Item.Name}!");
                 Console.WriteLine($"You have gained {Item.EffectStrength} sanity points.");
+                Console.ResetColor();
                 Console.WriteLine("---------------------------------------------------");
                 Item.ShowDetails();
                 Console.WriteLine("---------------------------------------------------");

@@ -40,7 +40,10 @@
         }
         public void ShowInventory()
         {
-            Console.WriteLine("Currently in your inventory:");
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Currently in your inventory:");
+            Console.ResetColor();
             Console.WriteLine();
 
             if (Items.Count > 0)
@@ -57,7 +60,10 @@
         }
         public void ShowEvidence()
         {
-            Console.WriteLine("Evidence discovered so far:");
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Evidence discovered so far:");
+            Console.ResetColor();
             Console.WriteLine();
 
             if (EvidenceCollected.Count > 0)
