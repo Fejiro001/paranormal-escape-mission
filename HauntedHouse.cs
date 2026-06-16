@@ -120,7 +120,7 @@
             return _rng.Next(1, ROOM_COUNT);
         }
 
-        public void CreateRooms()
+        private void CreateRooms()
         {
             // Clear all rooms
             foreach (var room in Rooms)
