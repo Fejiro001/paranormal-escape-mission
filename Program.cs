@@ -58,28 +58,6 @@
             }
         }
 
-        // Prompt to confirm game exit
-        static bool EndGame()
-        {
-            bool choiceCorrect;
-            int choice;
-            do
-            {
-                Console.WriteLine("Are you sure you want to leave?");
-                Console.WriteLine("1. Yes");
-                Console.WriteLine("2. No");
-
-                choiceCorrect = int.TryParse(Console.ReadLine(), out choice)
-                    && choice >= 1
-                    && choice <= 2;
-            }
-            while (!choiceCorrect);
-
-            if (choice == 1) return false;
-
-            return true;
-        }
-
         static void MainMenu(HauntedHouse house, Investigator investigator)
         {
             while (!house.IsGameOver(investigator))
@@ -181,6 +159,28 @@
             // End game if all sanity points are lost
             // Or max credibility points has been collected
             house.EndInvestigation(investigator);
+        }
+
+        // Prompt to confirm game exit
+        static bool EndGame()
+        {
+            bool choiceCorrect;
+            int choice;
+            do
+            {
+                Console.WriteLine("Are you sure you want to leave?");
+                Console.WriteLine("1. Yes");
+                Console.WriteLine("2. No");
+
+                choiceCorrect = int.TryParse(Console.ReadLine(), out choice)
+                    && choice >= 1
+                    && choice <= 2;
+            }
+            while (!choiceCorrect);
+
+            if (choice == 1) return false;
+
+            return true;
         }
     }
 }
