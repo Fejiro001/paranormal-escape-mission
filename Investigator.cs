@@ -36,6 +36,7 @@
             Console.WriteLine($"Your current location: {CurrentRoom.Name}");
             Console.WriteLine($"Sanity: {SanityLevel}");
             Console.WriteLine($"Credibility Score: {GetTotalCredibility()}");
+            Console.WriteLine("---------------------------------------------------");
             Console.WriteLine();
         }
         public void ShowInventory()
@@ -56,6 +57,7 @@
             else
             {
                 Console.WriteLine("Inventory is currently empty");
+                Console.WriteLine();
             }
         }
         public void ShowEvidence()

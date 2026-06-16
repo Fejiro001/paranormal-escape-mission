@@ -6,56 +6,81 @@
         {
             StartGame();
         }
+
         static void StartGame()
         {
-            HauntedHouse house = new HauntedHouse("The Screaming Oaks");
-            Investigator investigator = new Investigator("Stephanie Jones", house.Rooms[0], 100);
-            house.StartInvestigation(investigator);
-            Console.WriteLine("The entrance feels strangely calm...");
-            Console.WriteLine();
+            bool running = true;
 
-            bool isCorrect;
-            int startIndex;
+            while (running)
+            {
+                HauntedHouse house = new HauntedHouse("The Screaming Oaks");
+                Investigator investigator = new Investigator("Stephanie Jones", house.Rooms[0], 100);
+                house.StartInvestigation(investigator);
+                Console.WriteLine("The entrance feels strangely calm...");
+                Console.WriteLine();
+
+                bool isCorrect;
+                int startIndex;
+
+                do
+                {
+                    Console.WriteLine("Start Game?");
+                    Console.WriteLine("1. Start Exploring");
+                    Console.WriteLine("2. Exit");
+
+                    isCorrect = int.TryParse(Console.ReadLine(), out startIndex)
+                        && startIndex >= 1
+                        && startIndex <= 2;
+                    Console.WriteLine();
+
+                    if (!isCorrect)
+                    {
+                        Console.WriteLine("Invalid input.");
+                        Console.WriteLine();
+                    }
+                }
+                while (!isCorrect);
+
+                switch (startIndex)
+                {
+                    case 1:
+                        ShowRooms(house, investigator);
+                        break;
+                    case 2:
+                        running = EndGame();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid number.");
+                        break;
+                }
+            }
+        }
+
+        static bool EndGame()
+        {
+            bool choiceCorrect;
+            int choice;
 
             do
             {
-                Console.WriteLine("Start Game?");
-                Console.WriteLine("1. Start Exploring");
-                Console.WriteLine("2. Exit");
-
-                isCorrect = int.TryParse(Console.ReadLine(), out startIndex)
-                    && startIndex >= 1
-                    && startIndex <= 2;
                 Console.WriteLine();
+                Console.WriteLine("Are you sure you want to leave?");
+                Console.WriteLine("1. Yes");
+                Console.WriteLine("2. No");
 
-                if (!isCorrect)
-                {
-                    Console.WriteLine("Invalid input.");
-                    Console.WriteLine();
-                }
+                choiceCorrect = int.TryParse(Console.ReadLine(), out choice);
             }
-            while (!isCorrect);
+            while (!choiceCorrect || choice < 1 || choice > 2);
 
-            switch (startIndex)
-            {
-                case 1:
-                    ShowRooms(house, investigator);
-                    break;
-                case 2:
-                    house.EndInvestigation(investigator);
-                    break;
-                default:
-                    Console.WriteLine("Invalid number.");
-                    break;
-            }
+            if (choice == 1) return false;
+
+            return true;
         }
 
         static void ShowRooms(HauntedHouse house, Investigator investigator)
         {
             while (!house.IsGameOver(investigator))
             {
-                investigator.ShowStatus();
-
                 bool isValid;
                 int choice;
 
@@ -86,11 +111,9 @@
                         break;
                     case 2:
                         investigator.ShowInventory();
-                        Console.ReadLine();
                         break;
                     case 3:
                         investigator.ShowEvidence();
-                        Console.ReadLine();
                         break;
                     default:
                         Console.WriteLine("Invalid option.");
@@ -108,6 +131,8 @@
 
             while (showRoomsList)
             {
+                investigator.ShowStatus();
+
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write($"Rooms in {house.Name}:");
