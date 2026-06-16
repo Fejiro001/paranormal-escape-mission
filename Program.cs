@@ -54,6 +54,7 @@
                         break;
                 }
 
+                // Don't show menu if game is over
                 if (house.IsGameOver(investigator)) { running = false; }
             }
         }
@@ -66,6 +67,7 @@
                 int choice;
                 do
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Choose an action:");
                     Console.WriteLine("1. Move to Room");
                     Console.WriteLine("2. View Inventory");
@@ -99,14 +101,13 @@
                         Console.WriteLine("Invalid option.");
                         break;
                 }
-
             }
         }
 
         static void ShowRooms(HauntedHouse house, Investigator investigator)
         {
             bool showRoomsList = true;
-            while (showRoomsList && !house.IsGameOver(investigator))
+            while (showRoomsList)
             {
                 investigator.ShowStatus();
 
@@ -116,7 +117,7 @@
                 Console.ResetColor();
                 Console.WriteLine();
 
-                Console.WriteLine("0. Return to Menu");
+                Console.WriteLine("0. Return to Main Menu");
                 for (int i = 0; i < house.Rooms.Length; i++)
                 {
                     Console.WriteLine($"{i + 1}. {house.Rooms[i].Name}");
@@ -129,7 +130,9 @@
 
                 if (roomIndex == 0)
                 {
-                    showRoomsList = false; // back to action menu
+                    // Go back to the main menu
+                    showRoomsList = false;
+                    break;
                 }
 
                 // Make 0-based index
@@ -137,6 +140,7 @@
 
                 if (isCorrectRoom && roomIndex >= 0 && roomIndex < house.Rooms.Length)
                 {
+                    // Check if the Investigator is already in the room
                     if (investigator.CurrentRoom == house.Rooms[roomIndex])
                     {
                         Console.WriteLine();
@@ -154,11 +158,14 @@
                     Console.WriteLine();
                     Console.WriteLine("Enter a valid number.");
                 }
-            }
 
-            // End game if all sanity points are lost
-            // Or max credibility points has been collected
-            house.EndInvestigation(investigator);
+                // Stop showing rooms list if game is over
+                if (house.IsGameOver(investigator))
+                {
+                    showRoomsList = false;
+                    house.EndInvestigation(investigator);
+                }
+            }
         }
 
         // Prompt to confirm game exit

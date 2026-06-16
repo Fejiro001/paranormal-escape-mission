@@ -35,6 +35,7 @@
             Console.WriteLine();
         }
 
+        // Increase Ghost damage to sanity points
         private int GiveDamage()
         {
             switch (Behavior)

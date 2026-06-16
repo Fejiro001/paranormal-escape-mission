@@ -11,6 +11,7 @@
             Description = description;
             EffectStrength = effectStrength;
         }
+
         public void UseItem(Investigator investigator)
         {
             investigator.SanityLevel += EffectStrength;

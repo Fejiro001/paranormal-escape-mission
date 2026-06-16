@@ -10,6 +10,7 @@
         {
             Name = name;
         }
+
         public void SearchRoom(Investigator investigator)
         {
             bool foundSomething = false;
@@ -58,6 +59,7 @@
             }
             Console.WriteLine();
         }
+
         public void ShowRoomInfo()
         {
             Console.WriteLine($"You are in the {Name}.");

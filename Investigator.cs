@@ -15,6 +15,7 @@
             Items = new List<Item>();
             EvidenceCollected = new List<Evidence>();
         }
+
         public int GetTotalCredibility()
         {
             int total = 0;
@@ -24,11 +25,13 @@
             }
             return total;
         }
+
         public void MoveToRoom(Room room)
         {
             CurrentRoom = room;
             room.ShowRoomInfo();
         }
+
         public void ShowStatus()
         {
             Console.WriteLine("---------------------------------------------------");
@@ -39,6 +42,7 @@
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine();
         }
+
         public void ShowInventory()
         {
             Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -60,6 +64,7 @@
                 Console.WriteLine();
             }
         }
+
         public void ShowEvidence()
         {
             Console.BackgroundColor = ConsoleColor.DarkCyan;
