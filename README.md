@@ -1,14 +1,92 @@
 # Paranormal Investigation: Escape Mission
 
-The game is called **Paranormal Investigation: Escape Mission**. In the game, an investigator enters a haunted house and explores different rooms to gather paranormal evidence while avoiding dangerous ghost encounters. Ghosts reduce the investigator's sanity level, while items can restore sanity. The objective is to collect enough evidence to reach the required credibility score and escape before the investigator's sanity reaches zero.
+A console-based C# adventure game where you play as a paranormal investigator exploring a haunted house in search of evidence of supernatural activity.
 
-## Game Design
+Navigate through mysterious rooms, collect paranormal evidence, encounter hostile ghosts, and manage your sanity carefully. Gather enough credible evidence before your sanity reaches zero to successfully complete the investigation and escape the haunted house.
 
-To model the game, I created six classes:
+## Gameplay
 
-- **HauntedHouse** – Represents the haunted location being investigated. It contains the rooms, initializes the game, creates the room contents, and determines when the game ends.
-- **Room** – Represents an individual room within the haunted house. A room can contain ghosts, evidence, items, or nothing at all.
-- **Investigator** – Represents the player. The investigator can move between rooms, collect evidence and items, and has a sanity level that affects whether the game can continue.
-- **Ghost** – Represents paranormal entities found in rooms. Ghosts scare the investigator and reduce their sanity level.
-- **Evidence** – Represents paranormal clues collected by the investigator. Each piece of evidence has a credibility score that contributes toward winning the game.
-- **Item** – Represents helpful objects that can restore the investigator's sanity.
+The investigation begins inside **The Screaming Oaks**, a haunted manor containing multiple rooms.
+
+During the investigation, rooms may contain:
+
+- Ghosts that reduce your sanity.
+- Evidence that increases your credibility score.
+- Items that restore sanity.
+- Nothing at all.
+
+The contents of the rooms are randomized at the start of each game, making every investigation different.
+
+## Winning the Game
+
+To win, you must:
+
+- Collect evidence worth at least the required credibility score.
+- Maintain a sanity level above zero.
+
+You lose if:
+
+- Your sanity reaches zero or below before collecting enough credible evidence.
+
+## Features
+- Randomized room contents for replayability.
+- Multiple ghost behavior types:
+	- Passive
+	- Aggressive
+	- Violent
+- Credibility-based victory system.
+- Sanity management system.
+- Inventory tracking.
+- Evidence collection and reporting.
+- Interactive console menu system.
+- Final investigation report showing:
+	- Items collected
+	- Evidence discovered
+	- Total credibility score
+	- Remaining sanity
+
+## Object-Oriented Design
+
+The game is built using *six main classes*:
+
+### HauntedHouse
+
+Represents the haunted location being investigated. It manages room creation, game initialization, win/loss conditions, and investigation reports.
+
+### Room
+
+Represents a location within the haunted house. Rooms may contain ghosts, evidence, items, or be empty.
+
+### Investigator
+
+Represents the player. The investigator can move between rooms, collect evidence and items, and track sanity and credibility.
+
+### Ghost
+
+Represents paranormal entities encountered during the investigation. Different behavior types determine how much sanity damage they inflict.
+
+### Evidence
+
+Represents paranormal findings collected by the investigator. Each piece of evidence contributes a credibility score toward the investigation.
+
+### Item
+
+Represents useful tools or supplies that restore the investigator's sanity.
+
+## Technologies Used
+
+- C#
+- .NET Console Application
+- Object-Oriented Programming (OOP)
+
+## OOP Concepts Demonstrated
+
+- Classes and Objects
+- Constructors
+- Encapsulation
+- Properties
+- Access Modifiers
+- Static Members
+- Constants (`const`)
+- Readonly Fields (`readonly`)
+- Collections (`List<T>` and Arrays)
