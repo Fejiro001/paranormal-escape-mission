@@ -57,6 +57,8 @@
             {
                 Console.WriteLine("Nothing found here!");
             }
+
+            // Added a small break before the menu is shown
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
