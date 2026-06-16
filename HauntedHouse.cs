@@ -24,47 +24,6 @@
             };
         }
 
-        public bool IsGameOver(Investigator investigator)
-        {
-            return investigator.GetTotalCredibility() >= REQUIRED_CREDIBILITY || investigator.SanityLevel <= 0;
-        }
-
-        private int GetRandomRoomIndex()
-        {
-            return _rng.Next(1, ROOM_COUNT);
-        }
-
-        public void CreateRooms()
-        {
-            // Clear all rooms
-            foreach (var room in Rooms)
-            {
-                room.Ghost = null;
-                room.Item = null;
-                room.Evidence = null;
-            }
-
-            int room1 = GetRandomRoomIndex();
-            Rooms[room1].Evidence = new Evidence("Cold Spot Readings", "Sudden drop in temperature detected in the library.", 60);
-            Rooms[room1].Ghost = new Ghost("Blade", 5, Ghost.BehaviorType.Passive);
-
-            int room2;
-            do { room2 = GetRandomRoomIndex(); }
-            while (room1 == room2);
-            Rooms[room2].Item = new Item("EMF Reader", "Detect electromagnetic fluctuations caused by paranormal activity.", 20);
-
-            int room3;
-            do { room3 = GetRandomRoomIndex(); }
-            while (room3 == room1 || room3 == room2);
-            Rooms[room3].Ghost = new Ghost("Pascal", 10, Ghost.BehaviorType.Aggressive);
-
-            int room4;
-            do { room4 = GetRandomRoomIndex(); }
-            while (room4 == room1 || room4 == room2 || room4 == room3);
-            Rooms[room4].Ghost = new Ghost("Jasper", 20, Ghost.BehaviorType.Violent);
-            Rooms[room4].Evidence = new Evidence("EVP Recording", "Audio captured faint whispering voices to questions.", 90);
-        }
-
         public void StartInvestigation(Investigator investigator)
         {
             // Reset investigator state
@@ -82,7 +41,7 @@
             Console.WriteLine("===============================");
             Console.ResetColor();
             Console.WriteLine();
-            Console.WriteLine($"Collect evidence with a total credibility score of {REQUIRED_CREDIBILITY} score or higher to escape.");
+            Console.WriteLine($"Collect evidence with a total credibility score of {REQUIRED_CREDIBILITY} or higher to escape.");
             Console.WriteLine();
         }
 
@@ -149,6 +108,47 @@
             Console.WriteLine();
             Console.WriteLine($"Evidence Credibility Score: {investigator.GetTotalCredibility()}.");
             Console.WriteLine();
+        }
+
+        public bool IsGameOver(Investigator investigator)
+        {
+            return investigator.GetTotalCredibility() >= REQUIRED_CREDIBILITY || investigator.SanityLevel <= 0;
+        }
+
+        private int GetRandomRoomIndex()
+        {
+            return _rng.Next(1, ROOM_COUNT);
+        }
+
+        public void CreateRooms()
+        {
+            // Clear all rooms
+            foreach (var room in Rooms)
+            {
+                room.Ghost = null;
+                room.Item = null;
+                room.Evidence = null;
+            }
+
+            int room1 = GetRandomRoomIndex();
+            Rooms[room1].Evidence = new Evidence("Cold Spot Readings", "Sudden drop in temperature detected in the library.", 60);
+            Rooms[room1].Ghost = new Ghost("Blade", 5, Ghost.BehaviorType.Passive);
+
+            int room2;
+            do { room2 = GetRandomRoomIndex(); }
+            while (room1 == room2);
+            Rooms[room2].Item = new Item("EMF Reader", "Detect electromagnetic fluctuations caused by paranormal activity.", 20);
+
+            int room3;
+            do { room3 = GetRandomRoomIndex(); }
+            while (room3 == room1 || room3 == room2);
+            Rooms[room3].Ghost = new Ghost("Pascal", 10, Ghost.BehaviorType.Aggressive);
+
+            int room4;
+            do { room4 = GetRandomRoomIndex(); }
+            while (room4 == room1 || room4 == room2 || room4 == room3);
+            Rooms[room4].Ghost = new Ghost("Jasper", 20, Ghost.BehaviorType.Violent);
+            Rooms[room4].Evidence = new Evidence("EVP Recording", "Audio captured faint whispering voices to questions.", 90);
         }
     }
 }

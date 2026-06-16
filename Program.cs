@@ -13,7 +13,7 @@
 
             while (running)
             {
-                HauntedHouse house = new HauntedHouse("The Screaming Oaks");
+                HauntedHouse house = new HauntedHouse("The Screaming Oaks Manor");
                 Investigator investigator = new Investigator("Stephanie Jones", house.Rooms[0], 100);
 
                 house.StartInvestigation(investigator);
