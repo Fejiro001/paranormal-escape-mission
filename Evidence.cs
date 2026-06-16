@@ -2,7 +2,7 @@
 {
     public class Evidence
     {
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public int CredibilityScore { get; set; }
         public Evidence(string name, string description, int credibilityScore)
